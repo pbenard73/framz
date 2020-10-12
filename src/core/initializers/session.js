@@ -1,12 +1,14 @@
 import session from "express-session"
 import redis from "redis"
 import RedisStoreInit from "connect-redis"
+import crypter from "./../helpers/crypter"
 
 export default {
     useSession: function (value) {
         if (typeof value === "string") {
             this.config.useSession = true
             this.config.session.config.secret = value
+            crypter.setSecret(value)
         } else {
             this.config.useSession = value
         }
@@ -20,6 +22,11 @@ export default {
             this.config.session = { type, config, redisConfig }
         } else {
             this.config.session = { type }
+        }
+
+        const secret = this.config.session.config.secret
+        if (secret !== undefined) {
+            crypter.setSecret(secret)
         }
 
         return this

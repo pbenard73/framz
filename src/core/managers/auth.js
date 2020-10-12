@@ -1,4 +1,5 @@
 import database from "./../database/database"
+import crypter from "./../helpers/crypter"
 
 class AuthManager {
     loginMethod = null
@@ -11,21 +12,31 @@ class AuthManager {
         this.loginMethod = method
     }
 
-    login(payload) {
-    	return new Promise((resolve, reject) => {
-		let {username, password} = payload
+    login(req, payload) {
+        return new Promise((resolve, reject) => {
+            let { username, password: givenPassword } = req,
+                payload
 
-		const isEmpty = value => [null, undefined].indexOf(value) !== -1
+            const isEmpty = value => [null, undefined].indexOf(value) !== -1
 
-		if (isEmpty(username) === true || isEmpty(password) === true) {
-			return reject(new Error('Invalid login parameters'))
-		}
+            if (isEmpty(username) === true || isEmpty(givenPassword) === true) {
+                return reject(new Error("Invalid login parameters"))
+            }
 
-		/*
-		 * Check database
-		 */
+            const password = crypter(givenPassword)
 
-	})
+            database
+                .getRepository(req, "user")
+                .findOne({ where: { username, password, active: true } })
+                .then(user => {
+                    if (user === null) {
+                        return reject(new Error("User was not found"))
+                    }
+
+                    resolve(user)
+                })
+                .catch(error => reject(error))
+        })
     }
 }
 
