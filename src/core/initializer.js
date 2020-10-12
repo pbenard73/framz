@@ -5,6 +5,7 @@ import i_socket from "./initializers/socket"
 import i_third from "./initializers/third"
 import i_acl from "./initializers/acl"
 import i_admin from "./initializers/admin"
+import i_auth from "./initializers/auth"
 
 export const main = i_main
 export const session = i_session

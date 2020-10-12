@@ -3,10 +3,20 @@ import redis from "redis"
 import RedisStoreInit from "connect-redis"
 
 export default {
+    useSession: function (value) {
+        if (typeof value === "string") {
+            this.config.useSession = true
+            this.config.session.secret = value
+        } else {
+            this.config.useSession = value
+        }
+
+        return this
+    },
     setSessionConfig: function (type, config, redisConfig) {
         if (config === undefined) {
             this.config.session.config = type
-        } else if (redisConfig !== undefined){
+        } else if (redisConfig !== undefined) {
             this.config.session = { type, config, redisConfig }
         } else {
             this.config.session = { type }

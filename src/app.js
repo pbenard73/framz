@@ -43,7 +43,7 @@ class App {
     defaultConfig = {
         useCors: false,
         statics: {},
-        useSession: true,
+        useSession: false,
         useCompression: true,
         useSocket: false,
         useSessionSocket: false,
