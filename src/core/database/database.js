@@ -39,7 +39,6 @@ class Database {
 
         _.each(Object.keys(this.models), modelName => {
             this.databases[databaseName].models[modelName] = new this.models[modelName]().build(database)
-            this.repositories[modelName] = "main"
         })
     }
 

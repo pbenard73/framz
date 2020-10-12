@@ -6,7 +6,7 @@ export default {
     useSession: function (value) {
         if (typeof value === "string") {
             this.config.useSession = true
-            this.config.session.secret = value
+            this.config.session.config.secret = value
         } else {
             this.config.useSession = value
         }
