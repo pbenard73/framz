@@ -4,7 +4,7 @@ import _ from "underscore"
 import Repository from "./repository"
 
 let Database = function (req, modelName, databaseName = "main") {
-    const database = this.databases[databaseName]
+    const database = Database.databases[databaseName]
 
     if (database === undefined) {
         throw new Error(`Database '${databaseName}' is not registered`)
@@ -15,9 +15,9 @@ let Database = function (req, modelName, databaseName = "main") {
         throw new Error(`Model '${modelName}' is not registered in database '${databaseName}'`)
     }
 
-    const data = this.models[modelName]
+    const data = Database.models[modelName]
 
-    const CustomRepository = this.repositories[modelName]
+    const CustomRepository = Database.repositories[modelName]
 
     const ModelRepository = CustomRepository !== undefined ? CustomRepository : Repository
 
@@ -34,27 +34,29 @@ Database.databases = {
 Database.models = {
     user: User,
 }
+
 Database.repositories = {}
+
 Database.addRepository = function (modelName, Repo) {
-    this.repositories[modelName] = Repo
+    Database.repositories[modelName] = Repo
 }
 
 Database.getModel = function (modelName, database = "main") {
-    return this.databases[database].models[modelName]
+    return Database.databases[database].models[modelName]
 }
 
 Database.init = function (App) {
-    this.databases["main"].database = new Sequelize({ dialect: "postgres", ...App.config.database })
-    this.processModels("main")
+    Database.databases["main"].database = new Sequelize({ dialect: "postgres", ...App.config.database })
+    Database.processModels("main")
 
-    this.databases["main"].database.sync()
+    Database.databases["main"].database.sync()
 }
 
 Database.processModels = function (databaseName) {
-    const database = this.databases[databaseName].database
+    const database = Database.databases[databaseName].database
 
-    _.each(Object.keys(this.models), modelName => {
-        this.databases[databaseName].models[modelName] = new this.models[modelName]().build(database)
+    _.each(Object.keys(Database.models), modelName => {
+        Database.databases[databaseName].models[modelName] = new Database.models[modelName]().build(database)
     })
 }
 
