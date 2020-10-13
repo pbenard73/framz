@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "main": "./dist/index.js",
+    "author": "BENARD Patrick <pbenard73@gmail.com>",
     "scripts": {
         "build": "./node_modules/webpack/bin/webpack.js",
         "test": "jest",
