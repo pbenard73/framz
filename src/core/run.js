@@ -5,7 +5,7 @@ let server
 var port
 
 export default function () {
-    port = normalizePort(process.env.PORT || "3000")
+    port = normalizePort(process.env.PORT || this.config.port)
     this.app.set("port", port)
 
     server = http.createServer(this.app)

@@ -1,4 +1,8 @@
 export default {
+    setPort: function (port) {
+        this.config.port = port
+        return this
+    },
     use: function (...args) {
         this.uses.push(args)
         return this

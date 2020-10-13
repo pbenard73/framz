@@ -23,14 +23,15 @@ function importInitializers(...initializers) {
 }
 
 class App {
-    app = express();
-    uses = [];
-    routers = [];
-    publicFolders = [];
-    models = [];
-    sockets = [];
-    io = null;
+    app = express()
+    uses = []
+    routers = []
+    publicFolders = []
+    models = []
+    sockets = []
+    io = null
     config = {
+        port: 3000,
         admin: { use: false },
         session: {
             type: null,
@@ -38,7 +39,7 @@ class App {
             redisConfig: undefined,
         },
         socket: {},
-    };
+    }
 
     defaultConfig = {
         useCors: false,
@@ -47,9 +48,9 @@ class App {
         useCompression: true,
         useSocket: false,
         useSessionSocket: false,
-    };
+    }
 
-    inits = [];
+    inits = []
 
     constructor() {
         importInitializers.call(this, ...initializers)
