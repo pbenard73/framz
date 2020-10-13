@@ -3,6 +3,7 @@ import _ from "underscore"
 
 class BaseModel {
     name = undefined;
+    url = null;
     fields = {};
     translatedFields = [];
     createForm = null;

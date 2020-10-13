@@ -24,12 +24,22 @@ let Database = function (req, modelName, databaseName = "main") {
     return new ModelRepository(req, Model, data)
 }
 
+Database.hasUrlModel = function (urlModelName) {
+    return Database.modelsUrl[urlModelName] !== undefined
+}
+
+Database.getUrlRepository = function (req, urlModelName, databaseName = "main") {
+    return Database(req, Database.modelsUrl[urlModelName], databaseName)
+}
+
 Database.databases = {
     main: {
         database: null,
         models: {},
     },
 }
+
+Database.modelsUrl = {}
 
 Database.models = {
     user: User,
@@ -56,7 +66,9 @@ Database.processModels = function (databaseName) {
     const database = Database.databases[databaseName].database
 
     _.each(Object.keys(Database.models), modelName => {
-        Database.databases[databaseName].models[modelName] = new Database.models[modelName]().build(database)
+        const Model = new Database.models[modelName]()
+        Database.modelsUrl[modeName] = Model.url !== null ? Model.url : modelName
+        Database.databases[databaseName].models[modelName] = Model.build(database)
     })
 }
 
