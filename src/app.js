@@ -5,8 +5,8 @@ import _ from "underscore"
 import compression from "compression"
 import run from "./core/run"
 
-import { main, session, database, socket, third, acl, admin } from "./core/initializer"
-const initializers = [main, session, database, socket, third, acl, admin]
+import { main, session, database, socket, third, acl } from "./core/initializer"
+const initializers = [main, session, database, socket, third, acl]
 
 function importInitializers(...initializers) {
     const excepted = ["build"]
@@ -28,11 +28,9 @@ class App {
     routers = []
     publicFolders = []
     models = []
-    sockets = []
     io = null
     config = {
         port: 3000,
-        admin: { use: false },
         session: {
             type: null,
             config: {},

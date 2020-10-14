@@ -23,7 +23,10 @@ export default {
 
         return this
     },
+    getModule: function(moduleName) {
+        return moduleManager.getModule(moduleName)
+    },
     init: function () {
-
+    
     },
 }

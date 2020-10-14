@@ -1,3 +1,5 @@
+import socketManager from "./../managers/socket"
+
 export default {
     setSocketConfig: function (config) {
         if (config === undefined) {
@@ -17,15 +19,19 @@ export default {
     },
 
     addRooms: function (...rooms) {
-        this.sockets = [...this.sockets, ...rooms]
+        socketManager.addSockets(...rooms)
+
+        return this
+    },
+
+    includeSockets: function (...socketPools) {
+        socketManager.addActions(...socketPools)
 
         return this
     },
 
     initSocket: function (io) {
-        this.io = io
-
-        console.log("Jinit le io")
+        socketManager.init(io)
 
         return this
     },

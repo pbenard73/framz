@@ -61,9 +61,12 @@ class AclManager {
             return true
         }
 
+        const isOk = subject => [null, undefined].indexOf(subject) === -1
+
         return (
-            req.session !== undefined &&
-            req.session.user !== undefined &&
+            isOk(req) === true &&
+            isOk(req.session) === true &&
+            isOk(req.session.user) === true &&
             this.flatPool[req.session.user.acl] !== undefined &&
             this.flatPool[req.session.user.acl].indexOf(roleName) !== -1
         )

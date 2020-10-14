@@ -1,5 +1,6 @@
 class Module {
 	name = null
+    initializers = {}
 	routers = []
 	publicPaths = []
 	models = []

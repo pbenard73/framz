@@ -2,18 +2,18 @@ import Sequelize from "sequelize"
 import _ from "underscore"
 
 class BaseModel {
-    name = undefined;
-    url = null;
-    fields = {};
-    translatedFields = [];
-    createForm = null;
-    editForm = null;
-    softDeletable = false;
-    virtualFields = {};
-    links = {};
-    hooks = {};
+    name = undefined
+    url = null
+    fields = {}
+    translatedFields = []
+    createForm = null
+    editForm = null
+    softDeletable = false
+    virtualFields = {}
+    links = {}
+    hooks = {}
 
-    build(sequelize) {
+    getFields() {
         let fields = {}
         _.each(Object.keys(this.fields), field => {
             fields[field] = {
@@ -22,17 +22,21 @@ class BaseModel {
             }
         })
 
-        return sequelize.define(this.name, fields, { tableName: this.name })
+        return fields
+    }
+
+    build(sequelize) {
+        return sequelize.define(this.name, this.getFields(), { tableName: this.name })
     }
 
     fieldMapping(field) {
         switch (field.type) {
-        case "text":
-            return Sequelize.STRING(field.length !== undefined ? field.length : 250)
-        case "boolean":
-            return Sequelize.BOOLEAN
-        default:
-            return Sequelize.STRING(field.length !== undefined ? field.length : 250)
+            case "text":
+                return Sequelize.STRING(field.length !== undefined ? field.length : 250)
+            case "boolean":
+                return Sequelize.BOOLEAN
+            default:
+                return Sequelize.STRING(field.length !== undefined ? field.length : 250)
         }
     }
 }
