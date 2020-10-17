@@ -23,12 +23,17 @@ class AclManager {
         this.prepareHierarchy()
     }
 
+    getPool() {
+    	return this.pool
+    }
+
     addRole(roleName = required("roleName"), parent = null) {
         if (parent === null) {
             this.pool[roleName.toUpperCase()] = {}
         } else if (this.pool[parent.toUpperCase()] !== undefined) {
 		let found = false
 		this.pool['ROLE_SUPER_ADMIN'][roleName.toUpperCase()] = {}
+		console.log('add ' + roleName.toUpperCase())
         } else {
             throw new Error(`Role ${parent} was not found in hierarchy`)
         }
