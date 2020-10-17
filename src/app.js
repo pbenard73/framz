@@ -87,7 +87,7 @@ class App {
         })
 
         if (this.config.customError === null) {
-            this.use((error, req, res, next) => {
+            this.app.use((error, req, res, next) => {
                 res.status(error.status || 500).json({ valid: false, error: error.message })
             })
         }

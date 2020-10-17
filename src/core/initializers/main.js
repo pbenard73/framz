@@ -8,19 +8,19 @@ export default {
         return this
     },
     get: function (...args) {
-        this.routers.push(["get", args])
+        this.routers.push(["get", ...args])
         return this
     },
     post: function (...args) {
-        this.routers.push(["post", args])
+        this.routers.push(["post", ...args])
         return this
     },
     put: function (...args) {
-        this.routers.push(["put", args])
+        this.routers.push(["put", ...args])
         return this
     },
     delete: function (...args) {
-        this.routers.push(["delete", args])
+        this.routers.push(["delete", ...args])
         return this
     },
     addRouter: function (...args) {
