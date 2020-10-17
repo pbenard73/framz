@@ -12,7 +12,7 @@ class ModuleManager {
         return this.modules[moduleName]
     }
 
-    addModule(App, moduleObject) {
+    addModule(App, ModuleObject) {
         if (ModuleObject instanceof Module === false) {
             throw new Error(`Parameter must be a Module instance`)
         }
