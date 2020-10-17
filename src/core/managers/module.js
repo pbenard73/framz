@@ -1,7 +1,7 @@
 import AbstractThirdManager from './abstractThird'
 import Module from "./../thirds/module"
 
-class ModuleManager {
+class ModuleManager extends AbstractThirdManager {
     modules = {}
 
     hasModule(moduleName) {
