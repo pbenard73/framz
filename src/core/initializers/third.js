@@ -14,6 +14,7 @@ export default {
         return this
     },
     addModule: function (moduleObject) {
+	    console.log('INIT mod', moduleObject)
         moduleManager.addModule(moduleObject)
 
         return this
