@@ -27,8 +27,8 @@ class AclManager {
         if (parent === null) {
             this.pool[roleName.toUpperCase()] = {}
         } else if (this.pool[parent.toUpperCase()] !== undefined) {
-            // Loop to find parent
-            //            this.pool[parent.toUpperCase()].roleName = {}
+		let found = false
+		this.pool['ROLE_SUPER_ADMIN'][roleName.toUpperCase()] = {}
         } else {
             throw new Error(`Role ${parent} was not found in hierarchy`)
         }
