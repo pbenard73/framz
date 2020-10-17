@@ -21,4 +21,4 @@ export const database = baseDatabase
 export const Module = baseModule
 export const createError = baseCreateError
 export const express = baseExpress
-export const Router = Router
+export const Router = express.Router
