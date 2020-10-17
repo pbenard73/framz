@@ -25,7 +25,11 @@ class AbstractThirdManager {
 
     mergeRouters(App, third) {
         _.each(third.routers, router => {
-            App.addRouter(router)
+            if (router.constructor.name.toLowerCase() === "array") {
+                App.addRouter(...router)
+            } else {
+                App.addRouter(router)
+            }
         })
 
         return this
