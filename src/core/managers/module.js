@@ -12,11 +12,10 @@ class ModuleManager {
         return this.modules[moduleName]
     }
 
-    addModule(App, ModuleObject) {
-        const importedModule = new ModuleObject()
-        this.modules[importedModule.name] = importedModule
+    addModule(App, moduleObject) {
+        this.modules[moduleObject.name] = moduleObject
 
-        this.merge(App, importedModule)
+        this.merge(App, moduleObject)
     }
 }
 
