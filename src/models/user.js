@@ -2,6 +2,7 @@ import BaseModel from "./../core/database/baseModel"
 
 class User extends BaseModel {
     name = "user"
+    url="users"
     fields = {
         username: {
             type: "text",
