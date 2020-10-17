@@ -13,6 +13,7 @@ class ModuleManager {
     }
 
     addModule(App, moduleObject) {
+	    console.log('fra mo', moduleObject)
         this.modules[moduleObject.name] = moduleObject
 
         this.merge(App, moduleObject)
