@@ -13,10 +13,6 @@ class ModuleManager {
     }
 
     addModule(App, ModuleObject) {
-        if (ModuleObject instanceof Module === false) {
-            throw new Error(`Parameter must be a Module instance`)
-        }
-
         const importedModule = new ModuleObject()
         this.modules[importedModule.name] = importedModule
 
