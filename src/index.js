@@ -9,7 +9,6 @@ import baseSequelize from "sequelize"
 import baseModule from './core/thirds/module'
 import baseCreateError from 'http-errors'
 
-
 import middlewareAcl from "./core/middlewares/acl"
 
 export const App = baseApp
@@ -19,7 +18,7 @@ export const aclManager = baseAclManager
 export const cache = baseCacheManager
 export const crypter = baseCrypter
 export const database = baseDatabase
-export const express = baseExpress
-export const Router = express.Router
 export const Module = baseModule
 export const createError = baseCreateError
+export const express = baseExpress
+export const Router = Router

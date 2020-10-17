@@ -1,12 +1,12 @@
 class Module {
-	name = null
+    name = null
     initializers = {}
-	routers = []
-	publicPaths = []
-	models = []
-	socketRooms = []
-	sockets = []
-	acls=[]
+    routers = []
+    publicPaths = []
+    models = []
+    socketRooms = []
+    sockets = []
+    acls = []
 }
 
 export default Module

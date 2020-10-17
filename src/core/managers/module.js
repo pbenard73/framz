@@ -5,11 +5,11 @@ class ModuleManager {
     modules = {}
 
     hasModule(moduleName) {
-        return modules[moduleName] !== undefined
+        return this.modules[moduleName] !== undefined
     }
 
     getModule(moduleName) {
-        return modules[moduleName]
+        return this.modules[moduleName]
     }
 
     addModule(App, ModuleObject) {
@@ -17,8 +17,8 @@ class ModuleManager {
             throw new Error(`Parameter must be a Module instance`)
         }
 
-        const importedModule = new moduleObject()
-        modules[importedModule.name] = importedModule
+        const importedModule = new ModuleObject()
+        this.modules[importedModule.name] = importedModule
 
         this.merge(App, importedModule)
     }
