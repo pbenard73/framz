@@ -23,6 +23,10 @@ class Repository {
 
     createBulk(...args) {}
 
+	paginate(options) {
+		return this.findAll()
+	}
+
     findAll(options = {}) {
         return new Promise((resolve, reject) => {
             this.Model.findAll(this.prepareOptions(options))
