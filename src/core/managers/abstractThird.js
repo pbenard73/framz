@@ -24,7 +24,7 @@ class AbstractThirdManager {
     }
 
     mergeRouters(App, third) {
-        _.each(thirds.routers, router => {
+        _.each(third.routers, router => {
             App.addRouter(router)
         })
 
@@ -32,7 +32,7 @@ class AbstractThirdManager {
     }
 
     mergePublic(App, third) {
-        _.each(thirds.publicPaths, path => {
+        _.each(third.publicPaths, path => {
             App.addPublic(...path)
         })
 
@@ -56,7 +56,7 @@ class AbstractThirdManager {
     }
 
     mergeAcls(App, third) {
-        _.each(thirds.acls, acl => {
+        _.each(third.acls, acl => {
             App.addAcl(acl)
         })
 
