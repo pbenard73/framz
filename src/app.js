@@ -30,6 +30,7 @@ class App {
     models = []
     io = null
     config = {
+        customError: null,
         port: 3000,
         session: {
             type: null,
@@ -76,16 +77,20 @@ class App {
             }
         })
 
-
         _.each(this.uses, useArgs => {
             this.app.use(...useArgs)
         })
 
         _.each(this.routers, routerArgs => {
             let [type, ...args] = routerArgs
-console.log(type, args)
             this.app[type === "router" ? "use" : type](...args)
         })
+
+        if (this.config.customError === null) {
+            this.use((error, req, res, next) => {
+                res.status(error.status || 500).json({ valid: false, error: error.message })
+            })
+        }
 
         run.call(this)
     }
