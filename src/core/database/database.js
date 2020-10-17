@@ -67,7 +67,7 @@ Database.processModels = function (databaseName) {
 
     _.each(Object.keys(Database.models), modelName => {
         const Model = new Database.models[modelName]()
-        Database.modelsUrl[modelName] = Model.url !== null ? Model.url : modelName
+        Database.modelsUrl[Model.url !== null ? Model.url : modelName] = modelName
         Database.databases[databaseName].models[modelName] = Model.build(database)
     })
 }
