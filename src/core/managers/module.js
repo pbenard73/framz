@@ -13,10 +13,14 @@ class ModuleManager {
     }
 
     addModule(App, moduleObject) {
-	    console.log('fra mo', moduleObject)
-        this.modules[moduleObject.name] = moduleObject
+        if (ModuleObject instanceof Module === false) {
+            throw new Error(`Parameter must be a Module instance`)
+        }
 
-        this.merge(App, moduleObject)
+        const importedModule = new ModuleObject()
+        this.modules[importedModule.name] = importedModule
+
+        this.merge(App, importedModule)	    
     }
 }
 
