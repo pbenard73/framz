@@ -12,11 +12,14 @@ class AbstractThirdManager {
     }
 
     mergeInitializers(App, third) {
-        _.each(Object.keys(third.initializers), method => {
-            if (method === "init") {
+        const excepted = ["constructor"]
+
+        _.each(Object.keys(third.initializers), methodName => {
+            const method = third.initializers[methodName]
+            if (methodName === "init") {
                 App.inits.push(method)
-            } else if (excepted.indexOf(method) === -1) {
-                App[method] = (...args) => method.call(App, ...args)
+            } else if (excepted.indexOf(methodName) === -1) {
+                App[methodName] = (...args) => method.call(App, ...args)
             }
         })
 
