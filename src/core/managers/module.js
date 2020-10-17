@@ -13,7 +13,7 @@ class ModuleManager {
     }
 
     addModule(App, ModuleObject) {
-        if (ModuleObject instanceof Module === false) {
+        if (ModuleObject.prototype instanceof Module === false) {
             throw new Error(`Parameter must be a Module instance`)
         }
 
