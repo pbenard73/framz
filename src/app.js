@@ -82,9 +82,8 @@ class App {
         })
 
         _.each(this.routers, routerArgs => {
-            let [type, args] = routerArgs
-	    console.log(type, args)
-
+            let [type, ...args] = routerArgs
+console.log(type, args)
             this.app[type === "router" ? "use" : type](...args)
         })
 

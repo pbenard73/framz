@@ -24,7 +24,7 @@ export default {
         return this
     },
     addRouter: function (...args) {
-        this.routers.push(["router", args])
+        this.routers.push(["router", ...args])
         return this
     },
     addPublic(...args) {
