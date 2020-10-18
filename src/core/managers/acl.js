@@ -81,16 +81,16 @@ class AclManager {
             return check()
         }
 
-        const user = this.getUserByToken(givenToken)
+        const user = this.getUserByToken(req, givenToken)
 
         req.session.user = user === null ? undefined : user
 
         return check()
     }
 
-    getUserByToken = async token => {
+    getUserByToken = async (req, token) => {
         const promise = new Promise((resolve, reject) => {
-            database("user")
+            database(req, "user")
                 .findOne({ where: { token } })
                 .then(user => {
                     if (user === null) {
@@ -103,8 +103,11 @@ class AclManager {
         })
 
         try {
-            return await promise
+            const user = await promise
+
+	    console.log('USER', user)
         } catch (e) {
+		console.log(e)
             return null
         }
     }
