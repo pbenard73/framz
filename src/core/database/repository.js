@@ -6,8 +6,8 @@ class Repository {
     }
 
     prepareOptions(options = {}) {
-        if (options.row === undefined) {
-            options.row = true
+        if (options.raw === undefined) {
+            options.raw = true
         }
 
         return options
