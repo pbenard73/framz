@@ -17,6 +17,10 @@ class User extends BaseModel {
             type: "text",
             length: 500,
 	},
+	acl: {
+            type: "text",
+            length: 500,
+	},
 	tokenExpiresAt: {
             type: "datetime",
             length: 500,
