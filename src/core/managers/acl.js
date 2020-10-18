@@ -34,7 +34,6 @@ class AclManager {
         } else if (this.pool[parent.toUpperCase()] !== undefined) {
             let found = false
             this.pool["ROLE_SUPER_ADMIN"][roleName.toUpperCase()] = {}
-            console.log("add " + roleName.toUpperCase())
         } else {
             throw new Error(`Role ${parent} was not found in hierarchy`)
         }
@@ -62,7 +61,7 @@ class AclManager {
         })
     }
 
-    isGranted = async (req, roleName) => {
+    isGranted = (req, roleName) => {
         if (roleName === "ROLE_ANONYMOUS") {
             return true
         }
@@ -76,33 +75,37 @@ class AclManager {
             this.flatPool[req.session.user.acl] !== undefined &&
             this.flatPool[req.session.user.acl].indexOf(roleName) !== -1
 
-        const givenToken = req.get("token")
+        const givenToken = isOk(req) === true && isOk(req.get) === true ? req.get("token") : null
 
         if (isOk(givenToken) === false) {
             return check()
         }
 
+        const user = this.getUserByToken(givenToken)
+
+        req.session.user = user === null ? undefined : user
+
+        return check()
+    }
+
+    getUserByToken = async token => {
+        const promise = new Promise((resolve, reject) => {
+            database("user")
+                .findOne({ where: { token: givenToken } })
+                .then(user => {
+                    if (user === null) {
+                        return reject()
+                    }
+
+                    resolve(user)
+                })
+                .catch(error => reject(false))
+        })
+
         try {
-            const user = await new Promise((resolve, reject) => {
-                database("user")
-                    .findOne({ where: { token: givenToken } })
-                    .then(user => {
-                        if (user === null) {
-                            return reject()
-                        }
-
-                        resolve(user)
-                    })
-                    .catch(error => reject(false))
-
-                res.session.user = user
-
-                return check()
-            })
+            return await promise
         } catch (e) {
-            req.session.user = undefined
-
-            return check()
+            return null
         }
     }
 }

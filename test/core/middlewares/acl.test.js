@@ -18,7 +18,8 @@ test("Acl Middleware should be operationnal", () => {
             user: {
                 acl: 'ROLE_SUPER_ADMIN'
             }
-        }
+        },
+	get: () => null
     }
 
     expect(acl('ROLE_USER')(req, null, next)).toBe(true)

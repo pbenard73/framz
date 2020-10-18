@@ -22,6 +22,7 @@ test("Acl Manager: All features should work", () => {
                 acl: "ROLE_ADMIN",
             },
         },
+	get: () => null
     }
 
     expect(aclManager.isGranted(req, "ROLE_SUPER_ADMIN")).toBe(false)
