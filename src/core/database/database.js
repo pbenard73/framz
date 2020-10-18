@@ -55,12 +55,19 @@ Database.getModel = function (modelName, database = "main") {
     return Database.databases[database].models[modelName]
 }
 
-Database.init = function (App) {
+Database.getModelsInfo = function(App, returnInfo = true) {
     _.each(App.models, Model =>	{
     	const name = (new Model()).name
 	Database.models[name] = Model
     })
 
+    if (returnInfo === true) {
+    	return Object.keys(Database.models)
+    }
+}
+
+Database.init = function (App) {
+    Database.getModelsInfo(App, false)
     Database.databases["main"].database = new Sequelize({ dialect: "postgres", ...App.config.database })
     Database.processModels("main")
 

@@ -23,9 +23,9 @@ class Repository {
 
     createBulk(...args) {}
 
-	paginate(options) {
-		return this.findAll()
-	}
+    paginate(options) {
+        return this.findAll()
+    }
 
     findAll(options = {}) {
         return new Promise((resolve, reject) => {

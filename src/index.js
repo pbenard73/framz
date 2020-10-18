@@ -3,6 +3,7 @@ import baseApp from "./app"
 import baseAclManager from './core/managers/acl'
 import baseCacheManager from './core/managers/cache'
 import baseListener from './core/managers/listener'
+import baseSocket from './core/managers/socket'
 import baseCrypter from './core/helpers/crypter'
 import baseDatabase from "./core/database/database"
 import baseModel from "./core/database/baseModel"
@@ -21,6 +22,7 @@ export const cache = baseCacheManager
 export const crypter = baseCrypter
 export const database = baseDatabase
 export const listener = baseListener
+export const socket = baseSocket
 export const Model = baseModel
 export const Module = baseModule
 export const createError = baseCreateError
