@@ -45,7 +45,7 @@ class Repository {
 
     findOne(options = {}) {
         return new Promise((resolve, reject) => {
-            this.Model.findOne(this.prepareOptions(args))
+            this.Model.findOne(this.prepareOptions(options))
                 .then(result => resolve(result))
                 .catch(error => reject(error))
         })
