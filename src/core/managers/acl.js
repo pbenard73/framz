@@ -93,13 +93,15 @@ class AclManager {
             database(req, "user")
                 .findOne({ where: { token } })
                 .then(user => {
+			console.log('DB ', token)
+			console.log('DB USER', user)
                     if (user === null) {
                         return reject()
                     }
 
                     resolve(user)
                 })
-                .catch(error => reject(false))
+                .catch(error => reject(error))
         })
 
         try {
