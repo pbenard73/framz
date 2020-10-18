@@ -61,7 +61,7 @@ class AclManager {
         })
     }
 
-    isGranted = (req, roleName) => {
+    isGranted = async (req, roleName) => {
         if (roleName === "ROLE_ANONYMOUS") {
             return true
         }
@@ -81,7 +81,7 @@ class AclManager {
             return check()
         }
 
-        const user = this.getUserByToken(req, givenToken)
+        const user = await this.getUserByToken(req, givenToken)
 
         req.session.user = user === null ? undefined : user
 
