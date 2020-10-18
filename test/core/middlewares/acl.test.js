@@ -1,6 +1,6 @@
 import acl from "./../../../src/core/middlewares/acl"
 
-test("Acl Middleware should be operationnal", () => {
+test("Acl Middleware should be operationnal", async () => {
     const next = error => {
         if (error) {
             return false
@@ -10,8 +10,8 @@ test("Acl Middleware should be operationnal", () => {
 
     }
 
-    expect(acl('ROLE_ANONYMOUS')(null, null, next)).toBe(true)
-    expect(acl('ROLE_USER')(null, null, next)).toBe(false)
+    expect(await acl('ROLE_ANONYMOUS')(null, null, next)).toBe(true)
+    expect(await acl('ROLE_USER')(null, null, next)).toBe(false)
 
     const req = {
         session:{
@@ -22,5 +22,5 @@ test("Acl Middleware should be operationnal", () => {
 	get: () => null
     }
 
-    expect(acl('ROLE_USER')(req, null, next)).toBe(true)
+    expect(await acl('ROLE_USER')(req, null, next)).toBe(true)
 })
