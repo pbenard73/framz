@@ -62,7 +62,7 @@ class AclManager {
         })
     }
 
-    async isGranted(req, roleName) {
+    isGranted = async (req, roleName) => {
         if (roleName === "ROLE_ANONYMOUS") {
             return true
         }
