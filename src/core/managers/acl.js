@@ -105,9 +105,11 @@ class AclManager {
         try {
             const user = await promise
 
-	    console.log('USER', user)
+            console.log("USER", user)
+
+            return user
         } catch (e) {
-		console.log(e)
+            console.log("Error", e)
             return null
         }
     }
