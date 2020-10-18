@@ -69,15 +69,15 @@ class AclManager {
         const isOk = subject => [null, undefined].indexOf(subject) === -1
 
         const check = () => {
-            const isValid =
-                isOk(req) === true &&
-                isOk(req.session) === true &&
-                isOk(req.session.user) === true &&
-                this.flatPool[req.session.user.acl] !== undefined &&
-                this.flatPool[req.session.user.acl].indexOf(roleName) !== -1
+		const isValid = 
+            isOk(req) === true &&
+            isOk(req.session) === true &&
+            isOk(req.session.user) === true &&
+            this.flatPool[req.session.user.acl] !== undefined &&
+            this.flatPool[req.session.user.acl].indexOf(roleName) !== -1
 
-            return isValid === true
-        }
+		return isValid === true
+	}
 
         const givenToken = isOk(req) === true && isOk(req.get) === true ? req.get("token") : null
 
@@ -97,8 +97,8 @@ class AclManager {
             database(req, "user")
                 .findOne({ where: { token } })
                 .then(user => {
-                    console.log("DB ", token)
-                    console.log("DB USER", user)
+			console.log('DB ', token)
+			console.log('DB USER', user)
                     if (user === null) {
                         return reject()
                     }
@@ -111,8 +111,11 @@ class AclManager {
         try {
             const user = await promise
 
+            console.log("USER", user)
+
             return user
         } catch (e) {
+            console.log("Error", e)
             return null
         }
     }

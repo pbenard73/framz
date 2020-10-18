@@ -1,6 +1,6 @@
 import aclManager from "./../../../src/core/managers/acl"
 
-test("Acl Manager: All features should work", () => {
+test("Acl Manager: All features should work", async () => {
     aclManager.setHierarchy({
         ROLE_SUPER_ADMIN: {
             ROLE_ADMIN: {
@@ -25,7 +25,7 @@ test("Acl Manager: All features should work", () => {
 	get: () => null
     }
 
-    expect(aclManager.isGranted(req, "ROLE_SUPER_ADMIN")).toBe(false)
-    expect(aclManager.isGranted(req, "ROLE_ADMIN")).toBe(true)
-    expect(aclManager.isGranted(req, "ROLE_USER")).toBe(true)
+    expect(await aclManager.isGranted(req, "ROLE_ADMIN")).toBe(true)
+    expect(await aclManager.isGranted(req, "ROLE_USER")).toBe(true)
+    expect(await aclManager.isGranted(req, "ROLE_SUPER_ADMIN")).toBe(false)
 })

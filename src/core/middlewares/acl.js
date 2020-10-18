@@ -2,7 +2,7 @@ import aclManager from "./../managers/acl"
 import createError from "http-errors"
 
 export default roleName => async (req, res, next) => {
-    if ((await aclManager.isGranted(req, roleName)) === true) {
+    if ((await aclManager.isGranted(req, roleName, true)) === true) {
         return next()
     }
 

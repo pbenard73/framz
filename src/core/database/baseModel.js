@@ -35,6 +35,10 @@ class BaseModel {
                 return Sequelize.STRING(field.length !== undefined ? field.length : 250)
             case "boolean":
                 return Sequelize.BOOLEAN
+            case "datetime":
+                return Sequelize.DATE
+            case "date":
+                return Sequelize.DATEONLY
             default:
                 return Sequelize.STRING(field.length !== undefined ? field.length : 250)
         }
