@@ -91,7 +91,7 @@ class AclManager {
     getUserByToken = async token => {
         const promise = new Promise((resolve, reject) => {
             database("user")
-                .findOne({ where: { token: givenToken } })
+                .findOne({ where: { token } })
                 .then(user => {
                     if (user === null) {
                         return reject()
